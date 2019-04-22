@@ -41,18 +41,32 @@ class NewsQuery:  # Where the program stars. It creates different SQL queries.
 
     def evaluate(self, chosen_number):  # Return with the chosen SQL command.
         if chosen_number == '1':
-            chosen_question = 'select title, count(*) as num from splitpath '\
-                              'group by title order by num desc limit 3;'
+            chosen_question = '''SELECT title,
+                                        count(*) AS num
+                                 FROM splitpath
+                                 GROUP BY title
+                                 ORDER BY num DESC
+                                 LIMIT 3;'''
         elif chosen_number == '2':
-            chosen_question = 'select name, count(*) as num from authors, '\
-                'splitpath where splitpath.author = authors.id group by name '\
-                'order by num desc;'
+            chosen_question = '''SELECT name,
+                                        count(*) AS num
+                                 FROM authors,
+                                      splitpath
+                                 WHERE splitpath.author = authors.id
+                                 GROUP BY name
+                                 ORDER BY num DESC;'''
         else:
             chosen_number = '3'
-            chosen_question = 'select connection.alldate, div.round from '\
-                'connection, (select alldate, round(cast(float8 '\
-                '(failcon*100/allcon::float) as numeric),2) from connection)'\
-                ' as div where connection.alldate = div.alldate and round > 1;'
+            chosen_question = '''SELECT connection.alldate,
+                                        div.round
+                                 FROM CONNECTION,
+
+                                   (SELECT alldate,
+                                           round(cast(float8(failcon*100/
+                                                 allcon::float) AS numeric), 2)
+                                    FROM CONNECTION)AS div
+                                 WHERE connection.alldate = div.alldate
+                                   AND round > 1;'''
         return chosen_question, chosen_number
 
     def text(self, answers, query_id):  # It prints out the result.
