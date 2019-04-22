@@ -125,7 +125,8 @@ SELECT newall.alldate, newall.allcon, newfail.failcon
 FROM (SELECT cast(time as date) AS alldate, count(\*) AS allcon  
 FROM log GROUP BY alldate) AS newall,  
 (SELECT cast(time as date) AS faildate, count(\*) AS failcon  
-FROM log WHERE status = '404 NOT FOUND' GROUP BY faildate) AS newfail;
+FROM log WHERE status = '404 NOT FOUND' GROUP BY faildate) AS newfail  
+WHERE newall.alldate = newfail.faildate;
 
 
 ### LICENCE
