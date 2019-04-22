@@ -120,29 +120,13 @@ WHERE articles.slug = new.splitpath;
 
 **connection** table:
 
-<<<<<<< HEAD
-CREATE VIEW connection AS
-SELECT newall.alldate, newall.allcon, newfail.failcon
-FROM (SELECT cast(time as date) AS alldate, count(\*) AS allcon
-FROM log GROUP BY alldate) AS newall,
-(SELECT cast(time as date) AS faildate, count(\*) AS failcon
-FROM log WHERE status = '404 NOT FOUND' GROUP BY faildate) AS newfail
-||||||| merged common ancestors
-CREATE VIEW connection AS
-SELECT newall.alldate, newall.allcon, newfail.failcon
-FROM (SELECT cast(time as date) AS alldate, count(*) AS allcon
-FROM log GROUP BY alldate) AS newall,
-(SELECT cast(time as date) AS faildate, count(*) AS failcon
-FROM log WHERE status = '404 NOT FOUND' GROUP BY faildate) AS newfail
-=======
 CREATE VIEW connection AS  
 SELECT newall.alldate, newall.allcon, newfail.failcon  
 FROM (SELECT cast(time as date) AS alldate, count(\*) AS allcon  
 FROM log GROUP BY alldate) AS newall,  
 (SELECT cast(time as date) AS faildate, count(\*) AS failcon  
-FROM log WHERE status = '404 NOT FOUND' GROUP BY faildate) AS newfail  
->>>>>>> a81dacd0c2305d1eea27d47c3ad1d3a03f594175
-WHERE newall.alldate = newfail.faildate;
+FROM log WHERE status = '404 NOT FOUND' GROUP BY faildate) AS newfail
+
 
 ### LICENCE
 https://choosealicense.com/
