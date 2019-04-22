@@ -1,5 +1,6 @@
-import psycopg2
+#!/usr/bin/env python
 """This program makes various sql queries from the newsdata.sql file"""
+import psycopg2
 
 
 class ReadDataBase:  # Open db and evaluate the SQL command.
